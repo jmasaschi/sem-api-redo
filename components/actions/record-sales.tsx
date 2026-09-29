@@ -26,11 +26,11 @@ export async function recordSales(formData: FormData) {
     });
 
   if (error) {
-    console.error(error);
+    console.error("SUPABASE INSERT ERROR:", error);
 
     return {
       success: false,
-      error: "Unable to save submission."
+      error: error.message,
     };
   }
 
