@@ -7,12 +7,23 @@ import { Suspense } from "react";
 import NewSales from "@/components/new-sales"
 
 async function Sales() {
-  const supabase = await createClient();
+  // const supabase = await createClient();
   
-  const {data:sales, error} = await supabase.from('sales').select();
+  // const {data:sales, error} = await supabase.from('sales').select();
 
-  if (error || !sales) {
-    redirect("/auth/login") 
+  // if (error || !sales) {
+  //   redirect("/auth/login") 
+  // }
+
+  const supabase = await createClient();
+
+  const { data: sales, error } = await supabase
+    .from("sales")
+    .select();
+
+  if (error) {
+    console.error("SALES ERROR:", error);
+    return <p>Database error: {error.message}</p>;
   }
 
   return (
